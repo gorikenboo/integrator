@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Bootstrap Javascript(jQuery含む) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script>
+        var WolframCloudCallint;
+
+        (function () {
+            WolframCloudCallint = function () { this.init(); };
+
+            var p = WolframCloudCallint.prototype;
+
+            p.init = function () { };
+
+            p._createCORSRequest = function (method, url) {
+                var xhr = new XMLHttpRequest();
+                if ("withCredentials" in xhr) {
+                    xhr.open(method, url, true);
+                } else if (typeof XDomainRequest != "undefined") {
+                    xhr = new XDomainRequest();
+                    xhr.open(method, url);
+                } else {
+                    xhr = null;
+                }
+                return xhr;
+            };
+
+            p._encodeArgs = function (args) {
+                var argName;
+                var params = "";
+                for (argName in args) {
+                    params += (params == "" ? "" : "&");
+                    params += encodeURIComponent(argName) + "=" + encodeURIComponent(args[argName]);
+                }
+                return params;
+            };
+
+            p._auxCall = function (url, args, callback) {
+                var params = this._encodeArgs(args);
+                var xhr = this._createCORSRequest("post", url);
+                if (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.setRequestHeader("EmbedCode-User-Agent", "EmbedCode-JavaScript/1.0");
+                    xhr.onload = function () {
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                            callback(xhr.responseText);
+                        } else {
+                            callback(null);
+                        }
+                    };
+                    xhr.send(params);
+                } else {
+                    throw new Error("Could not create request object.");
+                }
+            };
+
+            p.call = function (int, a, b, callback) {
+                // ここのurlにurl1をペーストしてね！
+                var url = "http://www.wolframcloud.com/obj/463ef996-637f-4c70-8823-00e1aacc39f0";
+                var args = { int: int, a: a, b: b };
+                var callbackWrapper = function (result) {
+                    if (result === null) callback(null);
+                    else callback(result);
+                };
+                this._auxCall(url, args, callbackWrapper);
+            };
+        })();
+
+    </script>
+
+
+    <script>
+        //     /* 
+        // JavaScript EmbedCode usage:
+
+        // var wcc = new WolframCloudCall();
+        // wcc.call(int, a, b, function(result) { console.log(result); });
+        // */
+
+        var WolframCloudCall;
+
+        (function () {
+            WolframCloudCall = function () { this.init(); };
+
+            var p = WolframCloudCall.prototype;
+
+            p.init = function () { };
+
+            p._createCORSRequest = function (method, url) {
+                var xhr = new XMLHttpRequest();
+                if ("withCredentials" in xhr) {
+                    xhr.open(method, url, true);
+                } else if (typeof XDomainRequest != "undefined") {
+                    xhr = new XDomainRequest();
+                    xhr.open(method, url);
+                } else {
+                    xhr = null;
+                }
+                return xhr;
+            };
+
+            p._encodeArgs = function (args) {
+                var argName;
+                var params = "";
+                for (argName in args) {
+                    params += (params == "" ? "" : "&");
+                    params += encodeURIComponent(argName) + "=" + encodeURIComponent(args[argName]);
+                }
+                return params;
+            };
+
+            p._auxCall = function (url, args, callback) {
+                var params = this._encodeArgs(args);
+                var xhr = this._createCORSRequest("post", url);
+                if (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.setRequestHeader("EmbedCode-User-Agent", "EmbedCode-JavaScript/1.0");
+                    xhr.onload = function () {
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                            callback(xhr.responseText);
+                        } else {
+                            callback(null);
+                        }
+                    };
+                    xhr.send(params);
+                } else {
+                    throw new Error("Could not create request object.");
+                }
+            };
+
+            p.call = function (int, a, b, callback) {
+                // ここのurlにurl2をペーストしてね！
+                var url = "http://www.wolframcloud.com/obj/dbc60e42-507d-48a5-9b4c-89de0b3582b2";
+                var args = { int: int, a: a, b: b };
+                var callbackWrapper = function (result) {
+                    if (result === null) callback(null);
+                    else callback(result);
+                };
+                this._auxCall(url, args, callbackWrapper);
+            };
+        })();
+
+    </script>
+
+</head>
+
+<body>
+    <header style> </header>
+    <footer> <br></footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2" style="background-color:gray;">
+
+            </div>
+            <div class="col-sm-8" style ;>
+                <h1 style="text-align: center;">積分マシーン</h1>
+                <p style="text-align: center;">積分したい関数と、積分範囲を入力してください</p>
+
+                <div class="form-group">
+                    <label for="int_func">積分関数したい関数</label>
+                    <input type="text" class="form-control" id="int_func" placeholder="x^2+1">
+                </div>
+                <div class="form-group">
+                    <label for="int_range">積分範囲</label>
+                    <input type="text" class="form-control" id="int_range" placeholder="-2,5">
+                </div>
+                <button class="btn btn-default" id="int_btn">積分を実行する</button>
+
+                <div id="result" style="text-align: center;"></div>
+                <div id="result2" style="text-align: center;"></div>
+                <div id="graph">
+                </div>
+            </div>
+            <div class="col-sm-2" style="background-color:gray;"></div>
+        </div>
+    </div>
+    <footer style> </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $('#int_btn').on("click", function () {
+            let intfunc = $("#int_func").val();
+            let intrange = $("#int_range").val();
+            let intrange_min = intrange.split(",").map(Number)[0];
+            let intrange_max = intrange.split(",").map(Number)[1];
+            var wccint = new WolframCloudCallint();
+            wccint.call(intfunc, intrange_min, intrange_max, function (result) {
+                $("#result").text("積分の結果は" + result + "だよ");
+                $("#result2").text("積分した関数のグラフだよ　色がついているところが積分した場所だよ");
+            });
+            var wcc = new WolframCloudCall();
+            wcc.call(intfunc, intrange_min, intrange_max, function (result) {
+                $("#graph").html(result);
+            });
+
+        });
+    </script>
+</body>
+
+</html>
